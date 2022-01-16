@@ -1,12 +1,13 @@
 const {SlashCommandBuilder} = require('@discordjs/builders');
 const PollCanvas = require('../constructors/pollCanvas');
 const pollDB = require('../api/poll_db')
-const buttonTemplates = require('../templates/button_templates')
-const createButtons = require('../utils/createButtons')
-const dataTemplates = require('../templates/data_templates')
-const embedTemplates = require('../templates/embed_templates')
-const verifyPollData = require('../verification/verify_poll_data')
-const verifyCanvas = require('../verification/vierfy_canvas')
+const buttonTemplates = require('../templates/button_templates');
+const createButtons = require('../utils/createButtons');
+const dataTemplates = require('../templates/data_templates');
+const embedTemplates = require('../templates/embed_templates');
+const verifyPollData = require('../verification/verify_poll_data');
+const verifyCanvas = require('../verification/vierfy_canvas');
+const { img_channel } = require('../config.json');
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -52,14 +53,14 @@ module.exports = {
 
     async execute(interaction) {
         /** Discord channel for storing images */
-        let imageRepository = await interaction.client.channels.fetch("884189747906506825")
-        let pollData = dataTemplates.pollTemplate(interaction)
+        let imageRepository = await interaction.client.channels.fetch(img_channel);
+        let pollData = dataTemplates.pollTemplate(interaction);
 
-        if (!verifyPollData(pollData)) return
+        if (!verifyPollData(pollData)) return;
         
-        let pollCanvas = await new PollCanvas(pollData).renderPollCanvas()
+        let pollCanvas = await new PollCanvas(pollData).renderPollCanvas();
 
-        if (!verifyCanvas(pollCanvas, interaction)) return
+        if (!verifyCanvas(pollCanvas, interaction)) return;
 
         /**
          * Sends image to imageRepository to get an image URL.
@@ -71,7 +72,7 @@ module.exports = {
          * This creates a more seamless transition to the new image as opposed to
          * deleting the old message and creating a new one.
          */
-        const msg = await imageRepository.send({files: [pollCanvas]})
+        const msg = await imageRepository.send({files: [pollCanvas]});
         const url = msg.attachments.first()?.url ?? '';
 
         let message = await interaction.channel.send({
@@ -80,13 +81,13 @@ module.exports = {
         });
 
         // Saves messageId for future editing //
-        pollData['messageId'] = message.id
+        pollData['messageId'] = message.id;
         
         await interaction.reply({
             embeds: embedTemplates.pollValidation(pollData.id),
             ephemeral: true
-        })
+        });
 
-        pollDB.updatePoll(interaction.guild.id, pollData)
+        pollDB.updatePoll(interaction.guild.id, pollData);
     }
-}
+};

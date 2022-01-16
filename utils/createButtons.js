@@ -1,13 +1,13 @@
-const {MessageActionRow, MessageButton} = require('discord.js')
+const {MessageActionRow, MessageButton} = require('discord.js');
 
 /** Converts button object to MessageButton Class */
 module.exports = function createButtons(componentObjects) {
-    let components = []
+    let components = [];
 
     componentObjects.forEach(object => {
-        if (object.length === 0) return
+        if (object.length === 0) return;
 
-        let actionRow = new MessageActionRow()
+        let actionRow = new MessageActionRow();
 
         for (let component in object) {
             let destruct = object[component];
@@ -26,11 +26,11 @@ module.exports = function createButtons(componentObjects) {
                 .setCustomId(params['customId'])
                 .setURL(params['url'])
                 .setDisabled(params['disabled'])
-            )
-        }
+            );
+        };
 
-        components.push(actionRow)
-    })
+        components.push(actionRow);
+    });
 
-    return components
+    return components;
 };

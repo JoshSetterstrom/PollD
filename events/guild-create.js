@@ -4,6 +4,6 @@ module.exports = {
 	name: 'guildCreate',
 	once: true,
 	execute(guild) {
-		deployCommandsSingle(guild.id)
+		deployCommandsSingle(guild.id);
 	}
 };

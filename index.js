@@ -1,6 +1,6 @@
-const fs = require('fs')
-const {Client, Collection, Intents} = require('discord.js')
-const {token} = require('./config.json')
+const fs = require('fs');
+const {Client, Collection, Intents} = require('discord.js');
+const {token} = require('./config.json');
 
 const client = new Client({intents: [
 	Intents.FLAGS.GUILDS, 
@@ -19,13 +19,13 @@ for (const file of commandFiles) {
     const command = require(`./commands/${file}`);
 
     client.commands.set(command.data.name, command);
-}
+};
 
 for (const file of collectorFiles) {
     const command = require(`./collectors/${file}`);
 
     client.collectors.set(command.data.name, command);
-}
+};
 
 for (const file of eventFiles) {
 	const event = require(`./events/${file}`);
@@ -34,7 +34,7 @@ for (const file of eventFiles) {
 		client.once(event.name, (...args) => event.execute(...args));
 	} else {
 		client.on(event.name, (...args) => event.execute(...args));
-	}
-}
+	};
+};
 
 client.login(token);

@@ -1,6 +1,6 @@
 const {SlashCommandBuilder} = require('@discordjs/builders');
 const pollDB = require('../api/poll_db');
-const embedTemplates = require('../templates/embed_templates')
+const embedTemplates = require('../templates/embed_templates');
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -14,20 +14,20 @@ module.exports = {
 
 
     async execute(interaction) {
-        let pollId = interaction.options.data[0].value
-        
+        let pollId = interaction.options.data[0].value;
+
         if (!await pollDB.getPoll(interaction.guild.id, pollId)) {
             return interaction.reply({
                 embeds: embedTemplates.invalidPollId(pollId),
                 ephemeral: true
-            })
-        }
+            });
+        };
 
-        await pollDB.removePoll(interaction.guild.id, pollId)
+        await pollDB.removePoll(interaction.guild.id, pollId);
 
         return interaction.reply({
             embeds: embedTemplates.removeValidation(pollId),
             ephemeral: true
-        })
+        });
     }
-}
+};

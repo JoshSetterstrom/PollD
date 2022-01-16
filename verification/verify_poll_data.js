@@ -1,4 +1,4 @@
-const embedTemplates = require('../templates/embed_templates')
+const embedTemplates = require('../templates/embed_templates');
 
 module.exports = function verifyPollData(pollData) {
     if (pollData.title.length > 128) {

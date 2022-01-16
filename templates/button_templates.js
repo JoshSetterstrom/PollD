@@ -41,6 +41,6 @@ module.exports = {
                 customId: `get_polls_${currentPage+1}`,
                 disabled: currentPage === totalPages
             }
-        ]]
+        ]];
     }
-}
+};

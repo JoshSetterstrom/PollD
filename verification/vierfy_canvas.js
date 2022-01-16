@@ -1,4 +1,4 @@
-const embedTemplates = require('../templates/embed_templates')
+const embedTemplates = require('../templates/embed_templates');
 
 module.exports = function verifyCanvas(pollCanvas, interaction) {
     // try catch for lazy workaround for mulptiple links sent in image parameter //

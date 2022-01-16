@@ -10,6 +10,6 @@ module.exports = {
         return interaction.reply({
             embeds: embedTemplates.help(),
             ephemeral: true
-        })
+        });
     }
-}
+};

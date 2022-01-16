@@ -1,10 +1,10 @@
-const fs = require('fs')
+const fs = require('fs');
 const { REST } = require('@discordjs/rest');
 const { Routes } = require('discord-api-types/v9');
 const { clientId, token } = require('./config.json');
 
 module.exports = function deployCommandsSingle(guildId) {
-    const commands = []
+    const commands = [];
     const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
     
     for (const file of commandFiles) {
@@ -17,6 +17,4 @@ module.exports = function deployCommandsSingle(guildId) {
     rest.put(Routes.applicationGuildCommands(clientId, guildId), { body: commands })
         .then(() => console.log(`Successfully registered application commands for ${guildId}.`))
         .catch(console.error);
-}
-
-    
+};

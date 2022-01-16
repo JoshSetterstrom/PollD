@@ -30,7 +30,7 @@ module.exports = {
         return [{
             color: "GREEN",
             title: "PollD does not have acces to post in this channel."
-        }]
+        }];
     },
 
     invalidPollTitle(length) {
@@ -57,14 +57,14 @@ module.exports = {
         return [{
             color: "GREEN",
             title: `Unable to find Poll ${pollId}`,
-        }]
+        }];
     },
 
     invalidPollStatus(id) {
         return [{
             color: "GREEN",
             title: `Poll ${id} has already been closed.`,
-        }]
+        }];
     },
 
     invalidImageUrl() {
@@ -83,7 +83,7 @@ module.exports = {
             title: 
                 'You have voted too many times. You may only vote ' +
                 `${maxVote} time${maxVote === 1 ? "" : "s"} for this poll.`
-        }]
+        }];
     },
 
     poll(url) {
@@ -105,21 +105,21 @@ module.exports = {
         return [{
             color: "GREEN",
             title: `Poll ${id} has been closed.`
-        }]
+        }];
     },
 
     removeValidation(id) {
         return [{
             color: "GREEN",
             title: `Poll ${id} has been removed.`
-        }]
+        }];
     },
 
     refreshValidation(id) {
         return [{
             color: "GREEN",
             title: `Poll ${id} refreshed.`
-        }]
+        }];
     },
 
     getPolls(pageNumber, page, guild, filter) {
@@ -149,6 +149,6 @@ module.exports = {
                 }
             ],
             footer: {text: `Page ${pageNumber} of ${page.totalPages}`}
-        }]
+        }];
     }
 };
